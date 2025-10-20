@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family:Helvetica;
+        }
+        .username{
+            color: firebrick;
+            font-weight: bold;
+        }
+        .age{
+            color: navy;
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        let name;
+        let birth_year;
+        let this_year=new Date().getFullYear();
+        let age;
+
+        name=window.prompt("Please input your name:");
+        birth_year=window.prompt("Please input your birth year:");
+
+        birth_year = parseInt(birth_year)
+        age=this_year-birth_year;
+
+        document.writeln("<h1>Hello, <span class='username'>"+name+"</span>!</h1>");
+        console.log("Hello, "+name+"!");
+        if(age==1){
+            document.writeln("<h1>You are <span class='age'>one</span> year old!</h1>");
+            console.log("You are one year old!");
+        }
+        else if(isNaN(birth_year)||age<1){
+            window.alert("Your input is incorrect!");
+            document.writeln("<h1>Your age is a mystery!</h1>");
+            console.log("Your input is incorrect!");
+        }
+        else{
+            document.writeln("<h1>You are <span class='age'>"+ age +"</span> years old!</h1>");
+            console.log("You are "+ age +" years old!");
+        }
+           
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
