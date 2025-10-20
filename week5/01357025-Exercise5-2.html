@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Pokémon Grid</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto auto auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        #display {/*id*/
+            margin-top: 16px;
+            line-height: 0;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .btn:hover {
+            background: #f0f0f0;
+        }
+
+        hr {
+            margin: 16px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pokémon Grid</h1>
+
+    <form id="pokemonForm" onsubmit="return false;">
+        <div>
+            <label for="pokemon">Pokemon (1~5):</label><br />
+            <select id="pokemon">
+                <option value="1">1-pikachu</option>
+                <option value="2">2-bulbasaur</option>
+                <option value="3">3-charmander</option>
+                <option value="4">4-squirtle</option>
+                <option value="5">5-random</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="width">Side length (1~10):</label>(預設5)<br />
+            <input id="width" type="number" value="5" min="1" max="10" />
+        </div>
+
+        <div>
+            <label for="size">Image size (50~150):</label>(預設100)<br />
+            <input id="size" type="number" value="100" min="50" max="150" />
+        </div>
+
+        <button id="drawBtn" class="btn" type="button">Draw</button>
+        <button id="clearBtn" class="btn" type="button">Clear</button>
+    </form>
+
+    <hr />
+
+    <div id="display"></div>
+
+    <script>
+        const errMsg1 = "You input an invalid side length! It will be reset to 5.";
+        const errMsg2 = "Image size should be between 50 and 150! It will be reset to 100.";
+
+        let drawBtn=document.getElementById("drawBtn");
+        let clearBtn=document.getElementById("clearBtn");
+        const PokemonImage={
+            1: "pikachu.png",
+            2: "bulbasaur.png",
+            3: "charmander.png",
+            4: "squirtle.png"
+        };
+        drawBtn.addEventListener("click",function(){
+            let num=parseInt(document.getElementById("pokemon").value);
+            let Side_length=parseInt(document.getElementById("width").value);
+            let Image_size=parseInt(document.getElementById("size").value);
+            
+            if(Side_length<1||Side_length>10){
+                alert("You input an invalid side length! It will be reset to 5.")
+                document.getElementById("width").value=5;
+                return;
+            }
+            if(Image_size<50||Image_size>150){
+                alert("Image size should be between 50 and 150! It will be reset to 100.")
+                document.getElementById("size").value=100;
+                return;
+            }
+            let display=document.getElementById("display");
+            display.innerHTML = ""; 
+            display.style.display = "grid";
+            display.style.gridTemplateColumns = `repeat(${Side_length}, ${Image_size}px)`;
+            display.style.gridAutoRows = `${Image_size}px`;
+            for (let i = 0; i < Side_length * Side_length; i++) {
+                let img = document.createElement("img");
+                let imgSrc = "";
+
+                if (num === 5) {
+                    let rand = Math.floor(Math.random() * 4) + 1;
+                    imgSrc = PokemonImage[rand];
+                } else {
+                    imgSrc = PokemonImage[num];
+                }
+
+                img.src = imgSrc;
+                img.width = Image_size;
+                img.height = Image_size;
+
+                display.appendChild(img);
+        }
+    });
+    clearBtn.addEventListener("click", function () {
+        const display = document.getElementById("display");
+        display.innerHTML = "";
+        document.getElementById("width").value=5;
+        document.getElementById("size").value=100;
+    });
+    
+    </script>
+</body>
+
+</html>
