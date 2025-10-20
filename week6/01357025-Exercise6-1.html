@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<!-- Array Exercise-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>出包理由產生器</title>
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/cwtexkai.css);
+        .container{
+            font-family: 'cwTeXKai', 'Perpetua', serif;
+            text-align: center;
+        }
+        h1{
+            color: #2C3033;
+        }
+        .reason1{
+            color: #7392B7;
+        }
+        .reason2{
+            color: #AD343E;
+            font-size: 150%;
+        }
+        img{
+            height: 300px;
+        }
+    </style>
+
+    <script>
+        let iconImg;
+        const adjAry = ["客戶那邊的", "我們的", "負責談需求的", "負責這個部分的", "直到上線前一天", "(雙手一攤)"];
+        const nounAry = ["專案經理", "主管", "工程師", "設計師", "外包", "User", "聯絡窗口"];
+        const verbAry = ["當初沒有講清楚", "一直換", "說他肚子不舒服", "擺爛不想做了", "突然開始放長假", "去生小孩了", "離職了", "都沒甚麼 sense", "都沒有跟我講", "以為這些不用做", "一直在狀況外", "做事拖拖拉拉", "還搞不清楚狀況", "Quality 有問題", "東西一直改", "在整我", "突然就沒來了"];
+        const imageAry = ["Cat.jpg", "Boy.jpg", "Ohtani.jpg","Harry.jpg","Jacky.jpg"];
+        
+        function pick(){
+            let msg = document.getElementById("display");
+            let index_adj = Math.floor(Math.random()*adjAry.length);
+            let index_noun = Math.floor(Math.random()*nounAry.length);
+            let index_verb = Math.floor(Math.random()*verbAry.length);
+            let index_image = Math.floor(Math.random()*imageAry.length);
+            msg.innerHTML="<h1><div class='reason1'>" + adjAry[index_adj] + nounAry[index_noun] + "</div></h1>" + "<h1><div class='reason2'>" + verbAry[index_verb] + "</div></h1>";
+            iconImg.setAttribute("src", imageAry[index_image]);
+        }
+
+        function start() {
+            iconImg =document.getElementById("image");
+            iconImg.addEventListener("click",pick,false);
+            pick();
+        }
+        
+        window.addEventListener("load", start, false);
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">專案失敗了，是因為...</h1>
+        <div id="display">
+            <div class="reason1"></div>
+            <div class="reason2"></div>
+        </div>     
+        <img id="image" src="">
+    </div>
+</body>
+
+</html>

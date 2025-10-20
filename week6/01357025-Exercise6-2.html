@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Function</title>
+    <style type="text/css">
+        li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        ol {
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        img.dice {
+            width: 100px;
+            height: 100px;
+        }
+
+        img.congrats {
+            width: 440px;
+        }
+
+        #msg {
+            font-family: Helvetica, "Microsoft YaHei", "LiHei Pro", TW-Kai;
+            font-size: 120%;
+            color: navy;
+        }
+    </style>
+    <script>
+        let die1Image;
+        let die2Image;
+        let die3Image;
+        let die4Image;
+
+        let die1Value;
+        let die2Value;
+        let die3Value;
+        let die4Value;
+
+        let frequency1 = 0;
+        let frequency2 = 0;
+        let frequency3 = 0;
+        let frequency4 = 0;
+        let frequency5 = 0;
+        let frequency6 = 0;
+
+        let kinds=0;
+        let totalDice = 0;
+
+        // register button listener and get the img elements
+        function start() {
+            let button = document.getElementById("rollButton");
+            button.addEventListener("click",rollDice, false);
+            let button1 = document.getElementById("cheatButton");
+            button1.addEventListener("click",Shortcut, false);
+            let button2 = document.getElementById("cheatButton2");
+            button2.addEventListener("click",Shortcut2, false);
+            die1Image = document.getElementById("die1");
+            die2Image = document.getElementById("die2");
+            die3Image = document.getElementById("die3");
+            die4Image = document.getElementById("die4");
+        }
+
+        function reset(){
+            frequency1 = 0;
+            frequency2 = 0;
+            frequency3 = 0;
+            frequency4 = 0;
+            frequency5 = 0;
+            frequency6 = 0;
+            kinds=0;//有幾種不同點數
+            totalDice = 0;
+        }
+
+        // roll the dice
+        function rollDice() {
+            reset();
+            die1Value = Math.floor(1 + Math.random() * 6);
+            die2Value = Math.floor(1 + Math.random() * 6);
+            die3Value = Math.floor(1 + Math.random() * 6);
+            die4Value = Math.floor(1 + Math.random() * 6);
+            setImage(die1Image,die1Value);
+            setImage(die2Image,die2Value);
+            setImage(die3Image,die3Value);
+            setImage(die4Image,die4Value);
+            updateTable();
+        }
+
+        // 一色
+        function Shortcut() {
+            reset();
+            let value = Math.floor(1 + Math.random() * 6);
+            die1Value = die2Value = die3Value = die4Value =value;
+            setImage(die1Image,die1Value);
+            setImage(die2Image,die2Value);
+            setImage(die3Image,die3Value);
+            setImage(die4Image,die4Value);
+            updateTable();
+        } 
+
+        // 十八
+        function Shortcut2() {
+            reset();
+            let value = Math.floor(1 + Math.random() * 5);
+            die1Value = die2Value = 6;
+            die3Value = die4Value = value;
+            setImage(die1Image,die1Value);
+            setImage(die2Image,die2Value);
+            setImage(die3Image,die3Value);
+            setImage(die4Image,die4Value);
+            updateTable();
+        } 
+        
+        // set src and alt attributes for a die
+        function setImage(dieImg,value) {
+            dieImg.setAttribute("src", "die" + value + ".jpg");
+            dieImg.setAttribute("alt", "die image with " + value + " spot(s)");
+        }
+
+        // increment appropriate frequency counter
+        function tallyRolls(face) {
+            switch (face) {
+                case 1:
+                    ++frequency1;
+                    if (frequency1==1){kinds++;}
+                    break;
+                case 2:
+                    ++frequency2;
+                    if (frequency2==1){kinds++;}
+                    break;
+                case 3:
+                    ++frequency3;
+                    if (frequency3==1){kinds++;}
+                    break;
+                case 4:
+                    ++frequency4;
+                    if (frequency4==1){kinds++;}
+                    break;
+                case 5:
+                    ++frequency5;
+                    if (frequency5==1){kinds++;}
+                    break;
+                case 6:
+                    ++frequency6;
+                    if (frequency6==1){kinds++;}
+                    break;
+            } 
+        } 
+
+        //判斷&輸出
+        function updateTable(){
+            const valueArr=[die1Value,die2Value,die3Value,die4Value];
+            for(let i=0;i<valueArr.length;i++){
+                tallyRolls(valueArr[i]);
+                totalDice+=valueArr[i];
+            }
+            if (kinds==1){
+                msg.innerHTML="<p>Congratulations! Your roll is \"一色\"!</p>"+"<img src='congrats.png'>";
+            }
+            else if(kinds==4){
+                msg.innerHTML="<p>Oops! Your roll is \"無面\"!</p>";
+            }
+            else if((frequency1==3)||(frequency2==3)||(frequency3==3)||(frequency4==3)||(frequency5==3)||(frequency6==3)){
+                msg.innerHTML="<p>No decision, please re-roll the dice!</p>";
+            }
+            else{
+                if(frequency1==2){
+                    totalDice-=2;
+                    showScore(totalDice);
+                }
+                else if(frequency2==2){
+                    totalDice-=4;
+                    showScore(totalDice);
+                }
+                else if(frequency3==2){
+                    totalDice-=6;
+                    showScore(totalDice);
+                }
+                else if(frequency4==2){
+                    totalDice-=8;
+                    showScore(totalDice);
+                }
+                else if(frequency5==2){
+                    totalDice-=10;
+                    showScore(totalDice);
+                }
+                else{
+                    totalDice-=12;
+                    showScore(totalDice);
+                }
+            }
+        }
+
+        //顯示score
+        function showScore(score){
+            if(score==12){
+                msg.innerHTML="<p>Congratulations! Your roll is \"十八\"!</p>"+"<img src='congrats.png'>";
+            }
+            else{
+                msg.innerHTML="<p>Your score is "+totalDice+"!</p>";
+            }
+        }
+        
+        window.addEventListener("load", start, false);
+
+    </script>
+</head>
+
+<body>
+    <form action="#">
+        <input id="rollButton" type="button" value="Roll Dice">
+        <input id="cheatButton" type="button" value="Shortcut">
+        <input id="cheatButton2" type="button" value="Shortcut2">
+    </form>
+    <ol>
+        <li><img id="die1" class="dice" src="blank.jpg" alt="blank image"></li>
+        <li><img id="die2" class="dice" src="blank.jpg" alt="blank image"></li>
+        <li><img id="die3" class="dice" src="blank.jpg" alt="blank image"></li>
+        <li><img id="die4" class="dice" src="blank.jpg" alt="blank image"></li>
+    </ol>
+    <div id="msg"></div>
+</body>
+
+</html>
