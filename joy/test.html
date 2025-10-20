@@ -1,0 +1,229 @@
+<!-- and end with -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(ntou_logo.png);  /* 背景圖片 */
+            background-position: bottom right;     /* 右下角 */
+            background-repeat: no-repeat;          /* 不重複 */
+            background-attachment: fixed;          /* 背景固定不隨捲動 */
+            background-color: LightGrey;         /* 背景顏色 */
+            background-size: 100px 100px;          /*控制背景圖片大小*/
+        }
+        img{
+            height: 100px;
+        }
+        h1{
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2em;
+            /*  px：絕對單位，代表螢幕中每個「點」( pixel )。
+                em：相對單位，每個子元素透過「倍數」乘以父元素的 px 值。(為層層堆加)
+                rem：相對單位，每個元素透過「倍數」乘以根元素的 px 值。
+                %：相對單位，每個子元素透過「百分比」乘以父元素的 px 值。*/
+            color: rgba(255, 0, 0, 0.5);
+        }
+        em{
+            font-weight: bold;
+            /*  bold
+                normal (the default)
+                bolder (bolder than bold text)
+                lighter (lighter than normal text)*/
+        }
+        P::first-letter{
+            font-size: 200%;
+        }
+        h3{
+            text-indent: 30px;   /* 首行縮進 30 像素 */
+        }
+        h2{
+            text-decoration: none;
+        }
+        h4{
+            font-style: italic;
+            /*italic:斜體字型（字體本身有斜體設計）
+              oblique:斜體字型（人工傾斜字母，沒有真正斜體）*/
+        }
+        h5{
+            overflow: auto;
+            /*visible:預設值，內容超出容器會直接顯示，不裁切
+              hidden:超出部分會被裁切，不顯示滾動條
+              scroll:無論內容是否超出，都會顯示滾動條(v)
+              auto:內容超出時才顯示滾動條
+              clip:剪裁溢出部分，無滾動條（CSS 3）*/
+        }
+        td{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p>p</p>
+    <h1>h1</h1>
+    <h2>h2</h2>
+    <h3>h3</h3>
+    <h4>h4</h4>
+    <h5>h5</h5>
+    <h6>h6</h6>
+    <p><strong>Hello</strong> Everyone</p> <!--粗體-->
+    <p><a href="https://ou-joy.github.io/2025web/01357025-Exercise4-2.html">about ou</a></p>
+    <p><a href="mailto:joy20060814@gmail.com">email</a></p>
+    <p><img src="1.jpg" alt="me"></p>
+    <p>&amp; &apos; &gt; &lt; &quot;</p><!--& ' > < "-->
+    <p>&nbsp; &copy; &mdash; &ndash; &frac14; &frac12; &frac34; &hellip; &reg; &sect; &trade;</p>
+    <p><del>What</del></p>
+    <p>10<sup>2</sup></p>
+    <p><em>Hello</em> world</p><!--斜體-->
+    <hr><!--水平分隔線-->
+    
+    <ul><!--unorder list -->
+        <li>apple</li><!--list item -->
+        <li>banana</li>
+    </ul>
+    <ol><!--order list -->
+        <li>cat</li>
+        <li>dog</li>
+    </ol>
+    <hr>
+    <table border="1">
+        <caption>水果表</caption><!--表格標題-->
+        <thead><!--Table titles、column headers-->
+            <tr><!--表格水平元素 table rows-->
+                <th>Fruit</th><!--table header 表格第一欄用th-->
+                <th>price</th>
+                <th>where</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>apple</td><!--table data-->
+                <td colspan="2">50</td><!--橫跨兩格-->
+            </tr>
+            <tr>
+                <td>banana</td>
+                <td>10</td>
+                <td rowspan="2">USA</td><!--直跨兩格-->
+            </tr>
+            <tr>
+                <td>orange</td>
+                <td>20</td>
+            </tr>
+        </tbody>
+        <tfoot><!--Calculation results、Footnotes-->
+                <td>total</td>
+                <td>80</td>
+                <td>x</td>
+        </tfoot>
+    </table>
+    <table border="1">
+        <caption>div vs span</caption>
+        <thead>
+            <tr>
+                <th>特性</th>
+                <th>div</th>
+                <th>span</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>類型</td>
+                <td>block-level</td>
+                <td>inline-level</td>
+            </tr>
+            <tr>
+                <td>是否換行</td>
+                <td>Y</td>
+                <td>N</td>
+            </tr>
+            <tr>
+                <td>用途</td>
+                <td>分組區塊元素、布局</td>
+                <td>標記文字的一部分、加樣式或操作</td>
+            </tr>
+            <tr>
+                <td>常搭配</td>
+                <td>CSS、Flexbox、Grid</td>
+                <td>CSS、JavaScript</td>
+            </tr>   
+        </tbody>
+    </table>
+    <hr>
+    <form method="post" action="/formprocess.php" target="_blank"></form>
+    <!--
+        method- get:data會直接傳到網址(不安全)
+                post:data放在 HTTP 傳輸封包 body 中送出
+        action- 當 user 按送出表單後，要將表格的內容送去目標網址
+        target- _self: 顯示在表單所在的當前視窗
+                _blank: 顯示在新頁籤/視窗
+                _parent: 顯示在上一層的視窗 (用在例如如果表單是放在 <iframe> 中)
+                _top: 顯示在最頂層的視窗
+    -->
+    <p>
+        <label>
+            Enter your name:
+            <input  name="foo" type="text" value="">
+        </label>
+    </p>
+    <p>
+        <label>
+            <input type="tel" placeholder="(###)###-####" pattern="\(\d{3}\)+\d{3}-\d{4}" required />
+        </label>
+    </p>
+    <!-- 
+        name-   當表單送出時，這個欄位會以類似 "foo=輸入內容" 的形式傳給遠端伺服器
+        type-   text:建立一個文字輸入欄位
+                password:建立一個文字輸入欄位(會隱藏)
+                checkbox:選取按鈕(可複選)
+                radio:選取按鈕(不可複選)
+                submit:送出表單的按鈕
+                reset:清除表單按鈕
+                color:16進制
+                datetime(yyyy-mm-ddThh:mm+ff:gg)
+                datetime-local(yyyy-mm-ddThh:mm)
+                date(yyyy-mm-dd)/month(yyyy-mm)
+                time(hh:mm:ss.ff)/week(yyyy-Wnn)                       
+                email/number/range/search/url    
+        value-  預設值
+        placeholder- 輸入框內顯示提示文字（灰色的預設文字）
+        required -確保欄位不能留空
+    -->
+    <p>
+        <label>
+            Your Department:
+        <select name="departion">
+                <option>Department of Aquaculture</option>
+                <option>Department of Bioscience and Biotechnology</option>
+                <option>Department of Communications, Navigation and Control Engineering</option>
+                <option>Department of Computer Science and Engineering</option>
+        </select>
+        </label>
+        <!-- 
+            select-   下拉式選單
+        -->
+    </p>
+    <p>
+        <label>month:
+            <input  type="text" list="month" autocomplete="on">
+            <!-- autocomplete-   是否自動填寫-->
+            <datalist id="month">
+                <option value="January"></option>
+                <option value="February"></option>
+                <option value="March"></option>
+                <option value="April"></option>
+                <option value="May"></option>
+                <option value="June"></option>
+                <option value="July "></option>
+                <option value="August"></option>
+                <option value="September"></option>
+                <option value="October"></option>
+                <option value="November"></option>
+                <option value="December"></option>
+            </datalist>
+        </label>
+    </p>
+    <hr>
+</body>
+</html>

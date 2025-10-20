@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let name;//string entered by the user
+        let hour=new Date().getHours();
+        document.write("<h1 style ='color: magenta'>Welcome (write)</h1>");
+        document.write("<h1>Again (write)</h1>");
+        
+        document.writeln("<h1 style =\"color: magenta\">Welcome (writeln)</h1>");
+        document.writeln("<h1>Again (writeln)</h1>");
+        
+
+        window.alert("Hello!\nEveryone");/*<br>用不了*/ //對話提示框
+        console.log("Hello!<br>Everyone");//印出訊息到瀏覽器控制台
+
+        name = window.prompt("Please enter your name");
+        document.writeln("<h1>Hello,"+  name +"!</h1>");
+
+        if(hour===3){//字串比較
+            window.alert("Hihi");
+        }
+    </script>
+</body>
+</html>
