@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的軟體開發技術書籍收藏</title>
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+        body {
+            
+            font-family:cwTeXFangSong;
+        }
+
+        h1 {
+            color: darkblue;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        p {
+            color: #030303;
+            background-color: #d4f1f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .book {
+            display: flex;
+            float: left;
+            width: 50%;
+        }
+
+        .book img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .book-title {
+            font-weight: bold;
+            color: orange;
+        }
+
+        .book-description {
+            color: gray;
+            font-size: small;
+        }
+
+        .book-url a {
+            text-decoration: none;
+        }
+
+        input {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 5px;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        input.longInput {
+            width: 100%;
+        }
+
+        button {
+            width: 33%;
+            position: relative;
+            left: 33%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 0px;
+            background: orange;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    @media(max-width:600px){
+        .book{
+            width: 100%;
+            flex-direction:column;
+            text-align: left;
+        }
+        
+    }
+    </style>
+</head>
+
+<body>
+
+    <!-- HTML 部分 -->
+    <h1>我的軟體開發技術書籍收藏</h1>
+    <p>主要收藏Web programming與Software engineering相關書籍</p>
+
+    <!-- 使用者輸入 -->
+    
+        <label>
+            <input id="bookname" name="bookname" type="text" placeholder="輸入書籍名稱">
+        </label>
+        <label>
+            <input id="bookurl" name="bookurl" type="url" placeholder="書籍網址">
+        </label>
+        <label>
+            <input class="longInput" id="bookdescription" name="bookdescription" type="text" placeholder="輸入書籍描述">
+        </label>
+        
+        <button id="addButton">
+        新增書籍
+        </button>
+       
+        
+    
+    <hr>
+
+    <div id="bookList">
+        <!-- 初始書籍展示區塊 -->
+        <div class="book">
+            <img src="https://picsum.photos/150/150" alt="書籍封面">
+            <div class="book-title">《JavaScript: The Good Parts》</div>
+            <div class="book-url"><a href="https://example.com/js-good-parts" target="_blank">書籍連結</a></div>
+            <div class="book-description">由Douglas Crockford撰寫，是深入理解JavaScript精髓的經典書籍。</div>
+        </div>
+        <div class="book">
+            <img src="https://picsum.photos/150/150" alt="書籍封面">
+            <div class="book-title">《Clean Code》</div>
+            <div class="book-url"><a href="https://example.com/clean-code" target="_blank">書籍連結</a></div>
+            <div class="book-description">Robert C. Martin所著，介紹如何撰寫可維護且清晰的程式碼。</div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let bookArray = [
+            `<div class="book">
+                <img src="https://picsum.photos/150/150" alt="書籍封面">
+                <div class="book-title">《JavaScript: The Good Parts》</div>
+                <div class="book-url"><a href="https://example.com/js-good-parts" target="_blank">書籍連結</a></div>
+                <div class="book-description">由Douglas Crockford撰寫，是深入理解JavaScript精髓的經典書籍。</div>
+            </div>`,
+            `<div class="book">
+                <img src="https://picsum.photos/150/150" alt="書籍封面">
+                <div class="book-title">《Clean Code》</div>
+                <div class="book-url"><a href="https://example.com/clean-code" target="_blank">書籍連結</a></div>
+                <div class="book-description">Robert C. Martin所著，介紹如何撰寫可維護且清晰的程式碼。</div>
+            </div>`];
+
+            /**/
+        function add_Button(){
+            let bookname=document.getElementById("bookname");
+            let bookurl=document.getElementById("bookurl");
+            let bookdescription=document.getElementById("bookdescription");
+            if((bookname.value==="")||(bookdescription.value==="")){
+                window.alert("請輸入書籍名稱和描述");
+                return;
+            }
+            else{
+                let bookData=`<div class="book">
+                <img src="https://picsum.photos/150/150" alt="書籍封面">
+                <div class="book-title">`+bookname.value+`</div>
+                <div class="book-url"><a href="`+bookurl.value+`" target="_blank">書籍連結</a></div>
+                <div class="book-description">`+bookdescription.value+`</div>
+            </div>`;
+            bookArray.push(bookData);
+            bookList.innerHTML=bookArray.join('');
+            }
+            document.getElementById("bookname").value = "";
+            document.getElementById("bookurl").value = "";
+            document.getElementById("bookdescription").value = "";
+        }
+        function start(){
+            let button = document.getElementById("addButton");
+            button.addEventListener("click",add_Button, false);
+        }
+        window.addEventListener("load",start,false);
+    </script>
+
+</body>
+
+</html>
